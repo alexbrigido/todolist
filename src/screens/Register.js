@@ -14,6 +14,9 @@ import {
 const img = require('../assets/TodoList.png');
 
 export default class Register extends Component {
+  static navigationOptions = {
+    title: 'Register',
+  };
   state = {
     email: '',
     password: '',

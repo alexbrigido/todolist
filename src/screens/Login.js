@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   KeyboardAvoidingView,
   View,
   Image,
@@ -18,40 +17,40 @@ const Login = props => {
   const [password, setPassword] = useState('');
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <View style={styles.topView}>
-          <Image style={styles.img} source={img} />
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <View style={styles.topView}>
+        <Image style={styles.img} source={img} />
+      </View>
+      <View style={styles.bottomView}>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          keyboardType={'email-address'}
+          autoCapitalize="none"
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={password => setPassword(password)}
+        />
+        <Button
+          title="Sign In"
+          onPress={() => Alert.alert(`Email: ${email} \nPassword: ${password}`)}
+        />
+        <View style={styles.textConteiner}>
+          <Text>Not a member? Let's </Text>
+          <Text
+            style={styles.textRegister}
+            onPress={() => props.navigation.navigate('Register')}>
+            Register
+          </Text>
         </View>
-        <View style={styles.bottomView}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            keyboardType={'email-address'}
-            autoCapitalize="none"
-            value={email}
-            onChangeText={text => setEmail(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={password => setPassword(password)}
-          />
-          <Button
-            title="Sign In"
-            onPress={() =>
-              Alert.alert(`Email: ${email} \nPassword: ${password}`)
-            }
-          />
-          <View style={styles.textConteiner}>
-            <Text>Not a member? Let's </Text>
-            <Text style={styles.textRegister}>Register</Text>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
