@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+
 export default class TaskListView extends Component {
   _renderSectionHeader(sectionData) {
     return (
@@ -34,24 +35,24 @@ export default class TaskListView extends Component {
   render() {
     return (
       <SectionList
-        renderSectionHeader={section => this.renderSectionHeader(section)}
+        renderSectionHeader={section => this._renderSectionHeader(section)}
         sections={[
           {
-            data: this.state.tasks.filter(data => {
+            data: this.props.tasks.filter(data => {
               return data.priority;
             }),
             key: 'hightPriority',
             title: 'Hight Priority',
           },
           {
-            data: this.state.tasks.filter(data => {
+            data: this.props.tasks.filter(data => {
               return !data.priority;
             }),
             key: 'lowPriority',
             title: 'Low Priority',
           },
         ]}
-        renderItem={data => this.renderItem(data)}
+        renderItem={data => this._renderItem(data)}
       />
     );
   }
