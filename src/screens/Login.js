@@ -1,3 +1,4 @@
+import {CommonActions} from '@react-navigation/routers';
 import React, {Component, useState} from 'react';
 import {
   KeyboardAvoidingView,
@@ -32,6 +33,12 @@ export default class Login extends Component {
       Alert.alert(
         'User Authenticated',
         `User ${user.user.email} has succesfuly been authenticated!`,
+      );
+      this.props.navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'TaskList'}],
+        }),
       );
     } catch (error) {
       Alert.alert('Login Failed', error.message);
