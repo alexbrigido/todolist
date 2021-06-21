@@ -23,4 +23,21 @@ export async function signInOnFirebaseAsync(email, password) {
   return user;
 }
 
+export const currentFirebaseUser = () => {
+  return new Promise((resolve, reject) => {
+    let unsubscribe = null;
+    unsubscribe = firebase.auth().onAuthStateChanged(
+      user => {
+        resolve(user);
+      },
+      error => {
+        reject(error);
+      },
+      () => {
+        unsubscribe();
+      },
+    );
+  });
+};
+
 export const initializeFirebaseApi = () => firebase.initializeApp(config);
