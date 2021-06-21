@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {CommonActions} from '@react-navigation/routers';
+import {readTasksFromFirebaseAsync} from '../services/FirebaseApi';
 
 const imgCheckList = require('../assets/checklist.png');
 const imgPlus = require('../assets/plus.png');
 
 export default class ToDoTasks extends Component {
+  state = {
+    tasks: [],
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -20,6 +24,15 @@ export default class ToDoTasks extends Component {
 
   _goToTask() {
     this.props.navigation.navigate('Task');
+  }
+
+  componentDidMount() {
+    readTasksFromFirebaseAsync(this._fetchTasks.bind(this));
+  }
+
+  _fetchTasks(tasks) {
+    const tasksToDo = tasks.filter(t => !t.isDone);
+    this.setState({tasks: tasksToDo});
   }
 }
 
