@@ -8,13 +8,23 @@ const imgCheckList = require('../assets/checklist.png');
 const imgPlus = require('../assets/plus.png');
 
 export default class ToDoTasks extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'To Do',
+    tabBarIcon: ({tintColor}) => (
+      <Image source={imgCheckList} style={[styles.icon, {tintColor}]} />
+    ),
+  };
+
   state = {
     tasks: [],
   };
   render() {
     return (
       <View style={styles.container}>
-        <TaskListView tasks={this.state.tasks} />
+        <TaskListView
+          tasks={this.state.tasks}
+          navigation={this.props.navigation}
+        />
         <TouchableOpacity
           style={styles.floatButton}
           onPress={() => this._goToTask()}>
